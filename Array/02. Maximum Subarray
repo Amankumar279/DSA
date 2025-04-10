@@ -2,10 +2,17 @@ class Solution {
     public int maxSubArray(int[] nums) {
         int sum=0;
         int maxsum=-99999;
+        int start=0;
+        int ansstart=0,ansend=0;
 
         for(int i=0;i<nums.length;i++){
+            if(sum=0){
+                start=i;
+            }
             sum+=nums[i];
             maxsum=Math.max(maxsum,sum);
+                ansstart=start;
+                ansend=i;
              if (sum < 0) {
                 sum = 0;
             }
