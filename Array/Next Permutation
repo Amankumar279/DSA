@@ -31,7 +31,7 @@ class Solution {
         }
         if (idx==-1){
             reverse(nums,0,n-1);
-            return;
+            return;// directly return from the program
         }
         for(int i=n-1;i>idx;i--){
             if(nums[i]>nums[idx]){
