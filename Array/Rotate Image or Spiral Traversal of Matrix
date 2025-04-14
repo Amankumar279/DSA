@@ -1,0 +1,68 @@
+Example 1:
+Input: Matrix[][] = { { 1, 2, 3, 4 },
+		      { 5, 6, 7, 8 },
+		      { 9, 10, 11, 12 },
+	              { 13, 14, 15, 16 } }
+
+Outhput: 1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5, 6, 7, 11, 10.
+Explanation: The output of matrix in spiral form.
+
+Example 2:
+Input: Matrix[][] = { { 1, 2, 3 },
+	              { 4, 5, 6 },
+		      { 7, 8, 9 } }
+			    
+Output: 1, 2, 3, 6, 9, 8, 7, 4, 5.
+Explanation: The output of matrix in spiral form.
+
+
+ this approach, we will be using four loops to print all four sides of the matrix.
+
+1st loop: This will print the elements from left to right.
+
+2nd loop: This will print the elements from top to bottom.
+
+3rd loop: This will print the elements from right to left.
+
+4th loop: This will print the elements from bottom to top.
+
+Steps:
+
+Create and initialize variables top as starting row index, bottom as ending row index left as starting column index, and right as ending column index. As shown in the image given below.
+
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int left=0,right=m-1;
+        int top=0,bottom=n-1;
+        ArrayList<Integer> ans=new ArrayList<>();
+
+        while(left<=right&&top<=bottom){
+            for(int i=left;i<=right;i++){
+                ans.add(matrix[top][i]);
+            }
+            top++;
+              for(int i=top;i<=bottom;i++){
+                ans.add(matrix[i][right]);
+            }
+            right--;
+            if(top<=bottom){
+              for(int i=right;i>=left;i--){
+                ans.add(matrix[bottom][i]);
+            }
+            
+            bottom--;}
+
+            if(left<=right){  // this if for row
+              for(int i=bottom;i>=top;i--){
+                ans.add(matrix[i][left]);
+            }
+            left++;
+            }
+        }
+
+        return ans;
+    }
+}
