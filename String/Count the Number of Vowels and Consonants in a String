@@ -1,0 +1,20 @@
+nput: string str=”India won the cricket match”
+Output:
+Vowels: 8
+Consonants: 15
+White spaces: 4
+
+
+public class tUf {
+  public static void solve(String str, int length) {
+    int vowels = 0, consonants = 0, whitespaces = 0;
+    str = str.toLowerCase(); // converting given string to lowercase
+    for (int i = 0; i < length; i++) {
+      char ch = str.charAt(i);
+      if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
+        vowels++;
+      else if (ch >= 'a' && ch <= 'z')
+        consonants++;
+      else if (ch == ' ')
+        whitespaces++;
+    }
