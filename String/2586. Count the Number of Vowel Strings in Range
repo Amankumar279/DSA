@@ -1,0 +1,33 @@
+Input: words = ["are","amy","u"], left = 0, right = 2
+Output: 2
+Explanation: 
+- "are" is a vowel string because it starts with 'a' and ends with 'e'.
+- "amy" is not a vowel string because it does not end with a vowel.
+- "u" is a vowel string because it starts with 'u' and ends with 'u'.
+The number of vowel strings in the mentioned range is 2.
+
+Input: words = ["hey","aeo","mu","ooo","artro"], left = 1, right = 4
+Output: 3
+Explanation: 
+- "aeo" is a vowel string because it starts with 'a' and ends with 'o'.
+- "mu" is not a vowel string because it does not start with a vowel.
+- "ooo" is a vowel string because it starts with 'o' and ends with 'o'.
+- "artro" is a vowel string because it starts with 'a' and ends with 'o'.
+The number of vowel strings in the mentioned range is 3.
+
+class Solution {
+    public int vowelStrings(String[] words, int left, int right) {
+        int count =0;
+        for(int i=left;i<=right;i++){
+            String word=words[i];
+            int n=word.length();
+            char ch1=word.charAt(0);
+            char ch2=word.charAt(n-1);
+            if((ch1 == 'a' || ch1 == 'e' || ch1 == 'i' || ch1 == 'o' || ch1 == 'u')
+            &&(ch2 == 'a' || ch2 == 'e' || ch2 == 'i' || ch2 == 'o' || ch2 == 'u')){
+                count++;
+            }
+        }
+        return count;
+    }
+}
