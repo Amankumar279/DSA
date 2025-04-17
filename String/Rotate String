@@ -1,0 +1,18 @@
+Example 1:
+
+Input: s = "abcde", goal = "cdeab"
+Output: true
+Example 2:
+
+Input: s = "abcde", goal = "abced"
+Output: false
+
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        if (goal.length()!=s.length()) return false;
+        s=s+s;
+        if(s.contains(goal)){
+            return true; 
+        } else return false;
+    }
+}
