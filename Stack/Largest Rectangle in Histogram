@@ -1,0 +1,70 @@
+for image plzz go to the leet code so that u can better understand
+
+
+CODE IS EASY DONT PANIC FIRST WE FIND NERESET SMALLEST TO LEFT THAN RIGHT TO FIND THE WIDTH BY STORING ONLY THE INDEX
+
+Input: heights = [2,1,5,6,2,3]
+Output: 10
+Explanation: The above is a histogram where width of each bar is 1.
+The largest rectangle is shown in the red area, which has an area = 10 units.
+
+
+
+
+class Solution {
+    public int largestRectangleArea(int[] heights) {
+        int right[]= new int [heights.length];
+		int left[]= new int[heights.length];
+ 		int res=1; // find the max area
+		Stack<Integer> s = new Stack<>();
+		Stack<Integer> s2 = new Stack<>();
+
+		//NEAREST SMALLER TO left
+		for (int i = 0; i <heights.length; i++) {
+			if (s.isEmpty()) {
+				left[i]=-1;
+			} else if (heights[s.peek()] < heights[i]) {
+				left[i]= s.peek();
+			} else if (heights[s.peek()] >= heights[i]) {
+				while (!s.isEmpty() && heights[s.peek()] >= heights[i]) {
+					s.pop();
+				}
+				if (s.isEmpty()) {
+					left[i]=-1;
+				} else {
+					left[i] = s.peek();
+				}
+			}
+			s.push(i);
+		}
+		
+		// NEAEREST SMALLER TO RIGHT
+		for (int i = heights.length-1; i >=0; i--) {
+			if (s2.isEmpty()) {
+				right[i]=heights.length;
+			} else if (heights[s2.peek()] < heights[i]) {
+				right[i]= s2.peek();
+			} else if (heights[s2.peek()] >= heights[i]) {
+				while (!s2.isEmpty() && heights[s2.peek()] >= heights[i]) {
+					s2.pop();
+				}
+				if (s2.isEmpty()) {
+					right[i]=heights.length;
+				} else {
+					right[i] = s2.peek();
+				}
+			}
+			s2.push(i);
+		}
+		//calculate width= index of right - index of left -1
+		int  width[] = new int[heights.length];
+		for (int i = 0; i < heights.length; i++) {
+			width[i] = right[i]-left[i]-1;
+		}
+		//calculating max area  element * width
+		for (int i = 0; i < width.length; i++) {
+			res = Math.max(res, heights[i]*width[i]);
+		}
+        return res;
+    }
+    }
