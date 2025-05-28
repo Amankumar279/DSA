@@ -13,7 +13,7 @@ The largest rectangle is shown in the red area, which has an area = 10 units.
 
 class Solution {
     public int largestRectangleArea(int[] heights) {
-        int right[]= new int [heights.length];
+                int right[]= new int [heights.length];
 		int left[]= new int[heights.length];
  		int res=1; // find the max area
 		Stack<Integer> s = new Stack<>();
