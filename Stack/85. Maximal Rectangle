@@ -1,0 +1,90 @@
+dont panic it is also easy 
+
+Transform the matrix into a histogram matrix:
+
+Each cell in row i stores the height of the histogram built above it.
+
+If matrix[i][j] == '0', height is 0; else, mat[i][j] = mat[i-1][j] + 1.
+
+For each row, calculate the largest rectangle in histogram using:
+
+Next Smaller on Left (NSL)
+
+Next Smaller on Right (NSR)
+
+For each bar in the histogram:
+
+Compute width = right[j] - left[j] - 1
+
+Compute area = height * width
+
+Update maximum area
+
+Input: matrix = [["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]
+Output: 6
+Explanation: The maximal rectangle is shown in the above picture.
+
+
+class Solution {
+    public int maximalRectangle(char[][] matrix) {
+        if (matrix.length == 0) return 0;
+
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int[] arr = new int[m]; // Histogram based on each row
+        int max = 0;
+
+        // Build histogram row-by-row
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                // If cell is '1', increment height; else reset to 0
+                if (matrix[i][j] == '1') {
+                    arr[j] += 1;
+                } else {
+                    arr[j] = 0;
+                }
+            }
+            max = Math.max(max, largestRectangleArea(arr));
+        }
+
+        return max;
+    }
+
+    public int largestRectangleArea(int[] heights) {
+        int n = heights.length;
+        int[] left = new int[n];
+        int[] right = new int[n];
+        Stack<Integer> s = new Stack<>();
+         Stack<Integer> s2 = new Stack<>();
+
+        // Nearest Smaller to Left
+        for (int i = 0; i < n; i++) {
+            while (!s.isEmpty() && heights[s.peek()] >= heights[i]) {
+                s.pop();
+            }
+            left[i] = s.isEmpty() ? -1 : s.peek();
+            s.push(i);
+        }
+
+       
+
+        // Nearest Smaller to Right
+        for (int i = n - 1; i >= 0; i--) {
+            while (!s2.isEmpty() && heights[s2.peek()] >= heights[i]) {
+                s2.pop();
+            }
+            right[i] = s2.isEmpty() ? n : s2.peek();
+            s2.push(i);
+        }
+
+        // Calculate area
+        int maxArea = 0;
+        for (int i = 0; i < n; i++) {
+            int width = right[i] - left[i] - 1;
+            int area = heights[i] * width;
+            maxArea = Math.max(maxArea, area);
+        }
+
+        return maxArea;
+    }
+}
