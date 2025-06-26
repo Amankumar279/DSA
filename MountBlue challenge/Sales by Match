@@ -1,0 +1,24 @@
+STDIN                       Function
+-----                       --------
+9                           n = 9
+10 20 20 10 10 30 50 10 20  ar = [10, 20, 20, 10, 10, 30, 50, 10, 20]
+Sample Output
+
+3   
+
+just we have to find the pair in this question
+
+
+ public static int sockMerchant(int n, List<Integer> ar) {
+    // Write your code here
+int paired=0;
+HashMap<Integer,Integer> pair=new HashMap<>();
+        for(int i=0;i<n;i++){
+            pair.put(ar.get(i),pair.getOrDefault(ar.get(i),0)+1);
+        }
+            for(int count :pair.values()){
+                      paired+=count/2;}
+            return paired;
+    }
+
+}
