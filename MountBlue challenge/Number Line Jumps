@@ -1,0 +1,31 @@
+  You are choreographing a circus show with various animals. For one act, you are given two kangaroos on a number line ready to jump in the positive direction (i.e, toward positive infinity).
+
+The first kangaroo starts at location  and moves at a rate of  meters per jump.
+The second kangaroo starts at location  and moves at a rate of  meters per jump.
+You have to figure out a way to get both kangaroos at the same location at the same time as part of the show. If it is possible, return YES, otherwise return NO.
+
+
+
+
+
+ public static String kangaroo(int x1, int v1, int x2, int v2) {
+    // Write your code here
+ if (v1 == v2) {
+        // if speeds are same but positions different, they will never meet
+        return (x1 == x2) ? "YES" : "NO";
+    }
+    int X = x2 - x1;
+    int V = v1 - v2;
+
+    // they can meet only if:
+    // 1. deltaX divisible by deltaV (n is an integer)
+    // 2. n >= 0
+    if (V != 0 && X % V == 0 && (X / V) >= 0) {
+        return "YES";
+    } else {
+        return "NO";
+    }
+
+    }
+
+}
